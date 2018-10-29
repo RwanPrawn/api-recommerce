@@ -1,0 +1,12 @@
+App\Entity\Brand:
+  type: entity
+  repositoryClass: App\Repository\BrandRepository
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+      type: string
+      length: 200

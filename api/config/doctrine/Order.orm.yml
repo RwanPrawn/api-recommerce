@@ -1,0 +1,29 @@
+App\Entity\Order:
+  type: entity
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    customerEmail:
+      type: string
+      length: 200
+      nullable: false
+    created:
+      type: datetime
+      nullable: false
+    amount:
+      type: float
+      nullable: false
+  manyToMany:
+    mobiles:
+      targetEntity: App\Entity\Product
+      joinTable:
+        name: orders_products
+        joinColumns:
+          order_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          product_id:
+            referencedColumnName: id

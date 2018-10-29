@@ -23,7 +23,6 @@ doctrine:
         mappings:
             App:
                 is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/Entity'
+                type: yml
                 prefix: 'App\Entity'
-                alias: App
+                dir: '%kernel.project_dir%/config/doctrine'
