@@ -14,7 +14,9 @@
     "require-dev": {
         "behat/behat": "^3.5@dev",
         "behat/mink": "^1.7@dev",
+        "behat/mink-extension": "^2.1@dev",
         "behat/symfony2-extension": "^2.1@dev",
+        "behatch/contexts": "^3.0@dev",
         "phpspec/phpspec": "^5.1",
         "symfony/dotenv": "*"
     },
