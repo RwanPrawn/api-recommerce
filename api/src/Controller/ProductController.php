@@ -2,13 +2,14 @@
 
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Brand;
 use App\Entity\Product;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Swagger\Annotations as SWG;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends AbstractController
 {
@@ -43,14 +44,23 @@ class ProductController extends AbstractController
      *      description="Return a specific product",
      *      @Model(type=Product::class)
      * )
+     * @SWG\Response(
+     *      response=404,
+     *      description="Product not found"
+     * )
      */
     public function fetchProductAction(int $id): JsonResponse
     {
         $product = $this->getDoctrine()
             ->getRepository(Product::class)
-            ->findOneById($id);
+            ->findOneById($id)
+        ;
 
-        return $this->json($product);
+        if ($product) {
+            return $this->json($product);
+        }
+
+        return new JsonResponse("Product not found", Response::HTTP_NOT_FOUND);
     }
     
 }

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Brand;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class Product implements \JsonSerializable
 {
@@ -13,16 +14,22 @@ class Product implements \JsonSerializable
 
     /**
      * @var Brand
+     * 
+     * @Assert\NotBlank
      */
     private $brand;
 
     /**
      * @var string
+     * 
+     * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @var float
+     * 
+     * @Assert\GreaterThan(0.0)
      */
     private $price;
 
@@ -92,6 +99,9 @@ class Product implements \JsonSerializable
         return $this->id;
     }
 
+    /**
+     * @return array
+     */
     public function jsonSerialize(): array
     {
         return [

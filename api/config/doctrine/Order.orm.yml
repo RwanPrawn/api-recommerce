@@ -1,5 +1,7 @@
 App\Entity\Order:
   type: entity
+  repositoryClass: App\Repository\OrderRepository
+  table: "_order"
   id:
     id:
       type: integer
@@ -19,6 +21,7 @@ App\Entity\Order:
   manyToMany:
     mobiles:
       targetEntity: App\Entity\Product
+      fetch: "EAGER"
       joinTable:
         name: orders_products
         joinColumns:

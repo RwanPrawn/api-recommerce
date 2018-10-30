@@ -1,5 +1,6 @@
 App\Entity\Product:
   type: entity
+  repositoryClass: App\Repository\ProductRepository
   id:
     id:
       type: integer

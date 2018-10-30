@@ -2,12 +2,13 @@
 
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Brand;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Swagger\Annotations as SWG;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class BrandController extends AbstractController
 {
@@ -42,6 +43,10 @@ class BrandController extends AbstractController
      *      description="Return a specific brand",
      *      @Model(type=Brand::class)
      * )
+     * @SWG\Response(
+     *      response=404,
+     *      description="Brand not found"
+     * )
      */
     public function fetchBrandAction(int $id): JsonResponse
     {
@@ -49,7 +54,11 @@ class BrandController extends AbstractController
             ->getRepository(Brand::class)
             ->findOneById($id);
 
-        return $this->json($brand);
+        if ($brand) {
+            return $this->json($brand);
+        }
+
+        return new JsonResponse('Brand not found', Response::HTTP_NOT_FOUND);
     }
     
 }

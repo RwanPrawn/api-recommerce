@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use Swagger\Annotations as SWG;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class Brand implements \JsonSerializable
 {
@@ -13,6 +13,8 @@ class Brand implements \JsonSerializable
 
     /**
      * @var string
+     * 
+     * @Assert\NotBlank
      */
     private $name;
 
@@ -48,6 +50,9 @@ class Brand implements \JsonSerializable
         return $this->id;
     }
 
+    /**
+     * @return array
+     */
     public function jsonSerialize(): array
     {
         return [

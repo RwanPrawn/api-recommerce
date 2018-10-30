@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Entity\Product;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class Order implements \JsonSerializable
 {
@@ -13,21 +15,32 @@ class Order implements \JsonSerializable
 
     /**
      * @var string
+     * 
+     * @Assert\NotBlank
+     * @Assert\Email(
+     *      message = "This email '{{ value }}' is not valid."
+     * )
      */
     private $customerEmail;
 
     /**
      * @var Product[]
+     * 
+     * @Assert\NotBlank
      */
     private $mobiles;
 
     /**
      * @var float
+     * 
+     * @Assert\NotBlank
      */
     private $amount;
 
     /**
      * @var \Datetime
+     * 
+     * @Assert\NotBlank
      */
     private $created;
 
@@ -35,12 +48,10 @@ class Order implements \JsonSerializable
      * @param string $customerEmail
      * @param Product[] $mobiles
      */
-    public function __construct(
-        string $customerEmail,
-        array $mobiles
-    ) {
+    public function __construct(string $customerEmail)
+    {
         $this->customerEmail = $customerEmail;
-        $this->setMobiles($mobiles);
+        $this->mobiles = new ArrayCollection();
         $this->created = new \DateTime;
     }
 
@@ -73,7 +84,7 @@ class Order implements \JsonSerializable
      */
     public function setMobiles(array $mobiles)
     {
-        $this->mobiles = $mobiles;
+        $this->mobiles = new ArrayCollection($mobiles);
         $amount = 0.0;
         
         foreach ($mobiles as $mobile) {
@@ -81,6 +92,15 @@ class Order implements \JsonSerializable
         }
 
         $this->amount = $amount;
+    }
+
+    /**
+     * @param Product
+     */
+    public function addMobile(Product $mobile)
+    {
+        $this->mobiles[] = $mobile;
+        $this->amount += $mobile->getPrice();
     }
 
     /**
@@ -99,13 +119,16 @@ class Order implements \JsonSerializable
         return $this->amount;
     }
 
+    /**
+     * @return array
+     */
     public function jsonSerialize(): array
     {
         return [
             'id'                => $this->id,
             'customer_email'    => $this->customerEmail,
             'amount'            => $this->amount,
-            'mobiles'           => $this->mobiles,
+            'mobiles'           => $this->mobiles->toArray(),
             'created'           => $this->created,
         ];
     }
