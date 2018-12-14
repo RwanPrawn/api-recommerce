@@ -161,6 +161,15 @@
     "sebastian/recursion-context": {
         "version": "3.0.0"
     },
+    "sensio/framework-extra-bundle": {
+        "version": "5.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.2",
+            "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
+        }
+    },
     "symfony/asset": {
         "version": "4.1.x-dev"
     },
@@ -295,6 +304,15 @@
     },
     "symfony/var-dumper": {
         "version": "4.1.x-dev"
+    },
+    "symfony/webpack-encore-bundle": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "9aea6366d216792824dc4985fc56617fabdaf82b"
+        }
     },
     "symfony/yaml": {
         "version": "v4.1.6"

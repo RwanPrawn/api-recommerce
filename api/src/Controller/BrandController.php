@@ -13,6 +13,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class BrandController extends AbstractController
 {
     /**
+     * Default
+     * 
+     * @Route("/api")
+     */
+    public function defaultAction(): Response
+    {
+        return $this->render('base.html.twig');
+    }
+
+    /**
      * List the brands
      * 
      * @Route("/api/brands", methods={"GET"}, defaults={"_format": "json"})

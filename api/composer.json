@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "nelmio/api-doc-bundle": "^3.2@dev",
+        "sensio/framework-extra-bundle": "^5.2@dev",
         "symfony/asset": "*",
         "symfony/console": "*",
         "symfony/debug": "*",
@@ -14,6 +15,7 @@
         "symfony/orm-pack": "^1.0",
         "symfony/twig-bundle": "*",
         "symfony/validator": "*",
+        "symfony/webpack-encore-bundle": "dev-master",
         "symfony/yaml": "*"
     },
     "require-dev": {
